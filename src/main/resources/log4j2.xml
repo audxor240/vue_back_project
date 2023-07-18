@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+see : https://logging.apache.org/log4j/2.x/manual/appenders.html
+ -->
+<Configuration status="WARN">
+    <Properties>
+        <Property name="serverhome" value="${sys:catalina.home:-./logs}"/>
+        <Property name="rollingsize" value="500MB"/>
+        <Property name="rollingcount" value="20"/>
+    </Properties>
+
+    <Appenders>
+        <Console name="CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout charset="UTF-8" disableAnsi="false" noConsoleNoAnsi="false">
+                <pattern>%highlight{[%-5p] [%d{yyy-MM-dd a HH:mm:ss.SSS}] [%15.15t] %-25c{1.} : %m}{FATAL=bright red, ERROR=red, WARN=yellow, INFO=green, DEBUG=cyan, TRACE=white}%n</pattern>
+            </PatternLayout>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="javax.servlet" level="OFF"/>
+
+
+        <Logger name="com.zaxxer.hikari" level="FATAL"/>
+
+        <Logger name="java.sql" level="FATAL"/>
+
+        <Logger name="com.mitchellbosecke.pebble" level="INFO"/>
+
+        <Logger name="com.mitchellbosecke.pebble.spring.servlet.PebbleView.timer" level="DEBUG"/>
+
+        <Logger name="org.springframework.boot.diagnostics" level="DEBUG"/>
+
+        <Logger name="org.springframework.boot" level="FATAL"/>
+
+        <Logger name="org.springframework" level="FATAL"/>
+
+
+        <Logger name="jdbc.sqlonly" level="OFF"/>
+        <Logger name="jdbc.sqltiming" level="DEBUG"/>
+        <Logger name="jdbc.audit" level="OFF"/>
+        <Logger name="jdbc.resultset" level="OFF"/>
+        <Logger name="jdbc.resultsettable" level="ON"/>
+        <Logger name="jdbc.connection" level="OFF"/>
+
+        <Root level="INFO" includeLocation="true">
+            <AppenderRef ref="CONSOLE"/>
+        </Root>
+
+    </Loggers>
+</Configuration>
